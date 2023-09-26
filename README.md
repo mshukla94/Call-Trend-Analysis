@@ -27,7 +27,7 @@ Possible KPIs include (but not limited to):
 
 Dataset used for this task was presented by [PwC](https://www.pwc.ch/en/careers-with-pwc/students/virtual-case-experience.html)
 
-Call Centre Trends Dataset: [Call Centre Trends](https://github.com/yogeshkasar778/PWC_task-Call_Centre_trends-dashboard/blob/main/01%20Call-Center-Dataset.xlsx)
+Call Centre Trends Dataset: [Call Centre Trends](https://github.com/mshukla94/Call-Trend-Analysis/blob/main/01%20Call-Center-Dataset.xlsx)
 
 ## Data Preparation:
 
@@ -47,48 +47,29 @@ Data Cleaning for the dataset was done in the Power Query editor as follows:
 
 The dataset was then cleaned and transformed, for it to be ready for data modeling.
 
-- The `measure table` and `call centre trends` tables as show below:
+- The `Sheet1` tables as show below:
 
--![Screenshot (37)](https://user-images.githubusercontent.com/118357991/227766088-7fe8f2b3-b4b3-4cfd-a925-0895874ea956.png)
+-![Data Structure](https://github.com/mshukla94/Call-Trend-Analysis/blob/main/Dataset%20Structure.JPG)
 
 ## Data Analysis (DAX):
 
-Measures used in  all visualization are:
+Measures used in visualization are defined as below:
 
-- Average of seed of answerd = `AVERAGE('call centre trends'[Speed of answer in seconds])`
+- Avg Speed Answer = `CALCULATE(AVERAGE(Sheet1[Speed of answer in seconds]), FILTER(Sheet1, Sheet1[Speed of answer in seconds]>0))`
 
-- Average of statisfaction = `AVERAGE('call centre trends'[Satisfaction rating])`
+- Avg Satisfaction = `CALCULATE(AVERAGE('Sheet1'[Satisfaction rating]), 'Sheet1'[Satisfaction rating] IN { 2, 3, 4, 5, 1 })`
 
-- Count satisfation rating = `COUNT('call centre trends'[Satisfaction rating])`
+- Call Answered = `CALCULATE(COUNT(Sheet1[Answered (Y/N)]), FILTER(Sheet1, Sheet1[Answered (Y/N)]="Y" ))`
 
-- Overall Customer Satisfation = `DIVIDE([Possitive satisfation rating],[Count satisfation rating],0)`
-
-- Possitive satisfation rating = `CALCULATE(COUNT('call centre trends'[Satisfaction rating]),FILTER('call centre trends','call centre trends'[Satisfaction rating] IN {4,5}))`
-
-- resolved calls = `COUNTX(FILTER('call centre trends','call centre trends'[Resolved] = "Yes"), 'call centre trends'[Resolved])`
-
-- Unresolved calls = `COUNTX(FILTER('call centre trends','call centre trends'[Resolved] = "No"), 'call centre trends'[Resolved])`
-
-- total calls =  `CALCULATE('Table'[total calls answered] + 'Table'[total calls unanswred])`
-
-- total calls answered = `COUNTX(FILTER('call centre trends','call centre trends'[Answered (Y/N)] = "Yes"),'call centre trends'[Answered (Y/N)])`
-
-- total calls unanswred =`COUNTX(FILTER('call centre trends','call centre trends'[Answered (Y/N)] = "No"), 'call centre trends'[Answered (Y/N)])`
 
 ## Data Visualization (Dashboard) :
 
 Data visualization for the data analysis (DAX) was done in Microsoft Power BI Desktop:
 
-Shows visualizations from Call Center Trends :
-
 | Call Centre Trends (Overview) |
 | ----------- |
-| ![PWC Task 1 - Call Centre Dashboard-1](https://user-images.githubusercontent.com/118357991/227767359-463d93ee-5436-4f6a-ab7d-705c11d0dfbf.png) |
+| ![PWC Task - Call Centre Dashboard](https://github.com/mshukla94/Call-Trend-Analysis/blob/main/Call%20Trend%20Analysis%20v2.PNG) |
 
-
-| Call Centre Trends (Agent's Performance) |
-| ----------- |
-| ![PWC Task 1 - Call Centre Dashboard-2](https://user-images.githubusercontent.com/118357991/227767508-8667b273-6a78-40fa-bc20-78fc88c155cc.png) |
 
 ## Insights :
 
